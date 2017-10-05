@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+import boto3
+
+mfa_TOTP = raw_input("Enter the MFA code: ")
+
+client = boto3.client('sts')
+
+response = client.get_session_token(
+	DurationSeconds=900, 
+	SerialNumber='arn:aws:iam::062317582477:mfa/MattWhite',
+	TokenCode=mfa_TOTP
+)
+
+print(response)
